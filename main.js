@@ -145,7 +145,6 @@ function audioEvent() {
     audio.addEventListener('pause', function() {
         player.classList.remove('playing');
         cdThumpRotate.pause();
-        console.log(audio.duration)
     });
 };
 
@@ -205,11 +204,12 @@ function Next_n_Previous() {
 };
 
 function controlButtonNextEvent() {
+    timeProgress.value = 0
     cdThumpRotateEvent();
 
     setTimeout(function () {
         $('.control .btn:nth-child(4).active').classList.remove('active');
-    }, 10);
+    }, 100);
 
     getID_music++;
     if (getID_music > song.length - 1) {
@@ -220,11 +220,12 @@ function controlButtonNextEvent() {
 }
 
 function controlButtonPrevEvent() {
+    timeProgress.value = 0
     cdThumpRotateEvent();
 
     setTimeout(function () {
         $('.control .btn:nth-child(2).active').classList.remove('active');
-    }, 10);
+    }, 100);
 
     getID_music--;
     if (getID_music < 0) {
@@ -290,16 +291,16 @@ function timeUpdate() {
 
     function mouseUp() {
         audio.addEventListener('timeupdate', timeUpdate_Event);
-        // audio.currentTime = timeProgress.value * audio.duration / 100;
-        audio.currentTime = timeProgress.value
+        audio.currentTime = timeProgress.value * audio.duration / 100;
+        // audio.currentTime = timeProgress.value
     };  
 
     function timeUpdate_Event() {
         if (audio.duration) {
-            // perCentCurrentTime = audio.currentTime / audio.duration * 100;
-            // timeProgress.value = perCentCurrentTime;
-            timeProgress.value = audio.currentTime
-            timeProgress.max = audio.duration
+            perCentCurrentTime = audio.currentTime / audio.duration * 100;
+            timeProgress.value = perCentCurrentTime;
+            // timeProgress.value = audio.currentTime
+            // timeProgress.max = audio.duration
             timeProgress.addEventListener('mousedown', mouseDown);
             timeProgress.addEventListener('mouseup', mouseUp);
             timeProgress.addEventListener('touchstart', mouseDown);
@@ -362,7 +363,6 @@ function randomSong() {
     
             ranDom()        
     
-            console.log(handleRandom)
             getID_music = handleRandom[j]
             
             if ($('.player.playing')) {
@@ -422,6 +422,7 @@ function randomSongsWhenEnded() {
 };
 
 function btnNextRandomSong() {
+    timeProgress.value = 0;
     setTimeout(function () {
         $('.control .btn:nth-child(4).active').classList.remove('active')
     }, 10)
@@ -440,12 +441,11 @@ function btnNextRandomSong() {
         };
         getID_music = handleRandom[j]
         handleNextAndPreviousButton()
-        console.log('bài ' + j + ' là bài có id: ' + handleRandom[j])
-        console.log('getI: ' + getI)
     }
 }
 
 function btnPrevRandomSong() {
+    timeProgress.value = 0;
     setTimeout(function () {
         $('.control .btn:nth-child(2).active').classList.remove('active')
     }, 10)
