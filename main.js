@@ -353,7 +353,6 @@ function randomSong() {
             if (audio.getAttribute('src') != undefined) {
                 musicList.forEach(function (music, index) {
                     if (music == audio.getAttribute('src')) {
-                        console.log(song[index])
                         getI = index
                     }
                 })
@@ -404,7 +403,6 @@ function randomSongsWhenEnded() {
     j++;
 
     if (getI == handleRandom[j]) {
-        console.log('Bài hát này đã phát rồi nên chuyển sang bài kế tiếp');
         j++;
     };
 
@@ -417,8 +415,6 @@ function randomSongsWhenEnded() {
 
     handleNextAndPreviousButton()
     audio.play()
-
-    console.log(j + ':' + handleRandom[j])
 };
 
 function btnNextRandomSong() {
@@ -432,7 +428,6 @@ function btnNextRandomSong() {
     } else {
         j++;
         if (getI == handleRandom[j]) {
-            console.log('Bài hát này đã phát rồi nên chuyển sang bài kế tiếp');
             j++;
         };
         if (j > song.length - 1) {
@@ -453,7 +448,6 @@ function btnPrevRandomSong() {
     if ($('.player.playing')) {
         j--;
         if (getI == handleRandom[j]) {
-            console.log('Bài hát này đã phát rồi nên chuyển sang bài kế tiếp');
             j--;
         };
         if (j < 0) {
@@ -463,11 +457,9 @@ function btnPrevRandomSong() {
         getID_music = handleRandom[j]
         handleNextAndPreviousButton()
         audio.play()
-        console.log(j + ':' + handleRandom[j])
     } else {
         j--;
         if (getI == handleRandom[j]) {
-            console.log('Bài hát này đã phát rồi nên chuyển sang bài kế tiếp');
             j--;
         };
         if (j < 0) {
@@ -523,7 +515,6 @@ function setConfig(key, value, i) {
 
 // function loadConfig
 function loadConfig() {
-    // console.log(config)
     if (config) {
         if (config[1][0].key === 'Loop' && config[1][0].value === true) {
             btnLoopAudio.click()
